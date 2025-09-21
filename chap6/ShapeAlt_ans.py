@@ -1,13 +1,4 @@
 #!/usr/bin/env python3
-# Copyright (c) 2008-11 Qtrac Ltd. All rights reserved.
-# This program or module is free software: you can redistribute it and/or
-# modify it under the terms of the GNU General Public License as published
-# by the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version. It is provided for educational
-# purposes and is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-# General Public License for more details.
 
 """
 This module provides the Point and Circle classes.
@@ -69,6 +60,136 @@ class Point:
         5.0
         """
         return math.hypot(self.x, self.y)
+
+
+    def __add__(self, other):
+        """Returns a new Point whose coordinate are the sum of this
+        one's and the other one's
+
+        >>> p = Point(2, 4)
+        >>> q = p + Point(3, 5)
+        >>> q
+        Point(5, 9)
+        """
+        return Point(self.x + other.x, self.y + other.y)
+
+
+    def __iadd__(self, other):
+        """Returns this Point with its coordinate set to the sum of this
+        one's and the other one's
+
+        >>> p = Point(2, 4)
+        >>> p += Point(3, 5)
+        >>> p
+        Point(5, 9)
+        """
+        self.x += other.x
+        self.y += other.y
+        return self
+
+
+    def __sub__(self, other):
+        """Returns a new Point whose coordinate are the difference of this
+        one's and the other one's
+
+        >>> p = Point(2, 4)
+        >>> q = p - Point(3, 5)
+        >>> q
+        Point(-1, -1)
+        """
+        return Point(self.x - other.x, self.y - other.y)
+
+
+    def __isub__(self, other):
+        """Returns this Point with its coordinate set to the difference
+        of this one's and the other one's
+
+        >>> p = Point(2, 4)
+        >>> p -= Point(3, 5)
+        >>> p
+        Point(-1, -1)
+        """
+        self.x -= other.x
+        self.y -= other.y
+        return self
+
+
+    def __mul__(self, other):
+        """Returns a new Point whose coordinate is this one's multiplied
+        by the other number
+
+        >>> p = Point(2, 4)
+        >>> q = p * 3
+        >>> q
+        Point(6, 12)
+        """
+        return Point(self.x * other, self.y * other)
+
+
+    def __imul__(self, other):
+        """Returns this Point with its coordinate set to this one's
+        multiplied by the other number
+
+        >>> p = Point(2, 4)
+        >>> p *= 3
+        >>> p
+        Point(6, 12)
+        """
+        self.x *= other
+        self.y *= other
+        return self
+
+
+    def __truediv__(self, other):
+        """Returns a new Point whose coordinate is this one's divided
+        by the other number
+
+        >>> p = Point(2, 4)
+        >>> q = p / 2
+        >>> q
+        Point(1.0, 2.0)
+        """
+        return Point(self.x / other, self.y / other)
+
+
+    def __itruediv__(self, other):
+        """Returns this Point with its coordinate set to this one's
+        divided by the other number
+
+        >>> p = Point(2, 4)
+        >>> p /= 2
+        >>> p
+        Point(1.0, 2.0)
+        """
+        self.x /= other
+        self.y /= other
+        return self
+
+
+    def __floordiv__(self, other):
+        """Returns a new Point whose coordinate is this one's floor
+        divided by the other number
+
+        >>> p = Point(2, 4)
+        >>> q = p // 2
+        >>> q
+        Point(1, 2)
+        """
+        return Point(self.x // other, self.y // other)
+
+
+    def __ifloordiv__(self, other):
+        """Returns this Point with its coordinate set to this one's
+        floor divided by the other number
+
+        >>> p = Point(2, 4)
+        >>> p //= 2
+        >>> p
+        Point(1, 2)
+        """
+        self.x //= other
+        self.y //= other
+        return self
 
 
     def __eq__(self, other):
@@ -134,7 +255,8 @@ class Circle(Point):
 
     @property
     def radius(self):
-        """The circle's radius
+        """
+        The circle's radius
 
         >>> circle = Circle(-2)
         Traceback (most recent call last):
